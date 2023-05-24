@@ -1,26 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Link } from './common/icons/Link';
+import { Header } from './resume/Header';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+const App = () =>  (
+  <Header 
+    name="Stephen Roth"
+    tagline="Making something of myself" 
+    website="designbystephen.com"
+    email="designbystephen@gmail.com"
+    git="github.com/designbystephen"
+    location="St. Louis, MO"
+    avatar="images/stephen-roth-avatar.png"
+  />
+);
 
 export default App;

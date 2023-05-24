@@ -1,17 +1,15 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
 
-type BubbleProps = {
+type ArticleHeaderProps = {
   text: string,
 }
 
 const useStyles = createUseStyles({
 });
 
-export const Bubble = React.memo<BubbleProps>(({
-  text
-}) => (
-  <div>
+export const ArticleHeader = React.memo<ArticleHeaderProps>(({ text }) => (
+  <h3>
     {text}
-  </div>
-))
+  </h3>
+));
