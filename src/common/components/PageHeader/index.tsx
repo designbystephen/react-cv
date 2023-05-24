@@ -1,17 +1,13 @@
 import React from 'react';
-import { createUseStyles } from 'react-jss';
+// import { createUseStyles } from 'react-jss';
 
 type PageHeaderProps = {
-  text: string,
-}
+  text: string;
+};
 
+/* 
 const useStyles = createUseStyles({
 });
+*/
 
-export const PageHeader = React.memo<PageHeaderProps>(({
-  text
-}) => (
-  <h1>
-    {text}
-  </h1>
-));
+export default React.memo<PageHeaderProps>(({ text }) => <h1>{text}</h1>);

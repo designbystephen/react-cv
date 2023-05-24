@@ -1,15 +1,13 @@
 import React from 'react';
-import { createUseStyles } from 'react-jss';
+// import { createUseStyles } from 'react-jss';
 
 type ArticleSubHeaderProps = {
-  text: string,
-}
+  text: string;
+};
 
+/* 
 const useStyles = createUseStyles({
 });
+*/
 
-export const ArticleSubHeader = React.memo<ArticleSubHeaderProps>(({ text }) => (
-  <h3>
-    {text}
-  </h3>
-));
+export default React.memo<ArticleSubHeaderProps>(({ text }) => <h3>{text}</h3>);

@@ -2,8 +2,8 @@ import React from 'react';
 import { createUseStyles } from 'react-jss';
 
 type AvatarProps = {
-  image: string,
-}
+  image: string;
+};
 
 const useStyles = createUseStyles({
   avatar: {
@@ -13,17 +13,16 @@ const useStyles = createUseStyles({
       objectFit: 'cover',
       overflow: 'hidden',
       width: '150px',
-    }
-  }
+    },
+  },
 });
 
-export const Avatar = React.memo<AvatarProps>(({
-  image
-}) => { 
+export default React.memo<AvatarProps>(({ image }) => {
   const classes = useStyles();
 
   return (
-  <div className={classes.avatar}>
-    <img src={image} alt="Stephen Roth" />
-  </div>
-)})
+    <div className={classes.avatar}>
+      <img src={image} alt="Stephen Roth" />
+    </div>
+  );
+});

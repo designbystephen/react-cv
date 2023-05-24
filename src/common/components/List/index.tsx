@@ -1,20 +1,19 @@
 import React from 'react';
-import { createUseStyles } from 'react-jss';
+// import { createUseStyles } from 'react-jss';
 
 type ListProps = {
   items: string[];
-}
+};
 
+/* 
 const useStyles = createUseStyles({
 });
+*/
 
-export const List = React.memo<ListProps>(({
-  items
-}) => (
+export default React.memo<ListProps>(({ items }) => (
   <ul>
-    {items.map(item => (
+    {items.map((item) => (
       <li>{item}</li>
     ))}
   </ul>
 ));
-
