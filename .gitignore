@@ -133,3 +133,6 @@ dist
 
 # limit yarn/pnp usage for clarity
 package-lock.json
+
+# create-react-app builds
+build
