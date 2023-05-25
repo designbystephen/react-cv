@@ -17,7 +17,7 @@ const useStyles = createUseStyles({
   },
 });
 
-export default React.memo<AvatarProps>(({ image }) => {
+function Avatar({ image }: AvatarProps) {
   const classes = useStyles();
 
   return (
@@ -25,4 +25,6 @@ export default React.memo<AvatarProps>(({ image }) => {
       <img src={image} alt="Stephen Roth" />
     </div>
   );
-});
+}
+
+export default React.memo(Avatar);

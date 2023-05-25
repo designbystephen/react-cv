@@ -1,17 +1,24 @@
 import React from 'react';
-import Header from '../../resume/Header';
+import PageFooter from '../../common/components/PageFooter';
+import ResumeContainer from '../../resume/ResumeContainer';
 
 function App() {
   return (
-    <Header
-      name="Stephen Roth"
-      tagline="Making something of myself"
-      website="designbystephen.com"
-      email="designbystephen@gmail.com"
-      git="github.com/designbystephen"
-      location="St. Louis, MO"
-      avatar="images/stephen-roth-avatar.png"
-    />
+    <>
+      <ResumeContainer />
+      <PageFooter>
+        <p>
+          Icons used on this page were created by{' '}
+          <a href="https://fontawesome.com">Font Awesome</a> and are licensed
+          under{' '}
+          <a href="https://creativecommons.org/licenses/by/4.0">CC BY 4.0</a>.
+        </p>
+        <p>
+          Built with <a href="https://react.dev/">React</a> using{' '}
+          <a href="https://github.com/designbystephen/react-cv">react-cv</a>.
+        </p>
+      </PageFooter>
+    </>
   );
 }
 

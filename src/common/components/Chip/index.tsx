@@ -1,35 +1,45 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
 
-type ChipProps = {
+export type ChipProps = {
   icon: string | React.ReactNode;
   text: string;
-  link?: string;
+  url?: string;
 };
 
-const useStyles = createUseStyles({
-  chip: {
-    display: 'flex',
-    gap: '6px',
-  },
+const useStyles = createUseStyles(
+  {
+    root: {
+      display: 'flex',
+      gap: '6px',
+      alignItems: 'center',
+    },
 
-  icon: {
-    width: '16px',
-    height: '16px',
-  },
+    icon: {
+      '& > svg': {
+        width: '16px',
+        height: '16px',
+      },
+    },
 
-  text: {
-    flexGrow: 1,
+    text: {
+      padding: '4px 0',
+    },
   },
-});
+  { name: 'Chip' }
+);
 
-export default React.memo<ChipProps>(({ icon, text }) => {
+function Chip({ icon, text, url }: ChipProps) {
   const classes = useStyles();
 
   return (
-    <div className={classes.chip}>
+    <div className={classes.root}>
       <div className={classes.icon}>{icon}</div>
-      <div className={classes.text}>{text}</div>
+      <div className={classes.text}>
+        {url ? <a href={url}>{text}</a> : text}
+      </div>
     </div>
   );
-});
+}
+
+export default React.memo(Chip);

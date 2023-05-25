@@ -1,13 +1,23 @@
 import React from 'react';
-// import { createUseStyles } from 'react-jss';
+import { createUseStyles } from 'react-jss';
 
 type ArticleHeaderProps = {
   text: string;
 };
 
-/* 
-const useStyles = createUseStyles({
-});
-*/
+const useStyles = createUseStyles(
+  {
+    root: {
+      padding: '6px 0',
+    },
+  },
+  { name: 'ArticleHeader' }
+);
 
-export default React.memo<ArticleHeaderProps>(({ text }) => <h3>{text}</h3>);
+function ArticleHeader({ text }: ArticleHeaderProps) {
+  const classes = useStyles();
+
+  return <h3 className={classes.root}>{text}</h3>;
+}
+
+export default React.memo(ArticleHeader);

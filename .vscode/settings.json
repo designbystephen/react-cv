@@ -3,6 +3,7 @@
     "**/.yarn": true,
     "**/.pnp.*": true
   },
+  "editor.rulers": [80],
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true
 }

@@ -1,13 +1,26 @@
 import React from 'react';
-// import { createUseStyles } from 'react-jss';
+import { createUseStyles } from 'react-jss';
 
 type PageSubHeaderProps = {
   text: string;
 };
 
-/* 
-const useStyles = createUseStyles({
-});
-*/
+const useStyles = createUseStyles(
+  {
+    root: {
+      margin: '0 0 12px 0',
+      padding: 0,
+      fontWeight: 'normal',
+      fontStyle: 'italic',
+    },
+  },
+  { name: 'PageSubHeader' }
+);
 
-export default React.memo<PageSubHeaderProps>(({ text }) => <h4>{text}</h4>);
+function PageSubHeader({ text }: PageSubHeaderProps) {
+  const classes = useStyles();
+
+  return <h4 className={classes.root}>{text}</h4>;
+}
+
+export default React.memo(PageSubHeader);
