@@ -1,5 +1,6 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
+import { getMediaQueryForDevice } from '../../styles/utils';
 
 type AvatarProps = {
   image: string;
@@ -13,7 +14,14 @@ const useStyles = createUseStyles({
       objectFit: 'cover',
       overflow: 'hidden',
       width: '150px',
+    
+      [getMediaQueryForDevice('phone')]: {
+        height: '112.5px',
+        width: '112.5px'
+      }
     },
+
+
   },
 });
 
