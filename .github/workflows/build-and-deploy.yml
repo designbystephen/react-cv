@@ -28,7 +28,9 @@ jobs:
         run: git clone https://github.com/designbystephen/designbystephen.github.io.git
 
       - name: Copy artifacts to deployment repository
-        run: cp -R ./build/* designbystephen.github.io/
+        run: |
+          cp -Rf ./build/* designbystephen.github.io/
+          ls ./build
     
       - name: Commit and push changes
         env:
