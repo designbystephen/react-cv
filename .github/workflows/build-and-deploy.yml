@@ -32,11 +32,12 @@ jobs:
     
       - name: Commit and push changes
         env:
-            ANOTHER_REPO_TOKEN: ${{ secrets.GH_PAGES_DEPLOY }}
+            GH_PAGES_DEPLOY: ${{ secrets.GH_PAGES_DEPLOY }}
         run: |
           cd designbystephen.github.io/
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
           git add .
           git commit -m "Update from GitHub Actions"
+          git remote set-url origin https://${{ secrets.GH_PAGES_DEPLOY }}@github.com/designbystephen/designbystephen.github.io.git
           git push
