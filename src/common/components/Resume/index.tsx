@@ -3,18 +3,11 @@ import { createUseStyles } from 'react-jss';
 import BubbleList from '../BubbleList';
 import Education, { EducationProps } from '../Education';
 import Experience, { ExperienceProps } from '../Experience';
-import Masthead from '../Masthead';
+import Masthead, { MastheadProps } from '../Masthead';
 import Reflex from '../Reflex';
 import Section from '../Section';
 
-type ResumeProps = {
-  name: string;
-  tagline: string;
-  website?: { name: string; url: string };
-  profile?: { name: string; url: string };
-  git?: { name: string; url: string };
-  location?: string;
-  avatar: string;
+type ResumeProps = MastheadProps & {
   experience: ExperienceProps[];
   technicalSkills: string[];
   personalSkills: string[];
@@ -44,7 +37,7 @@ function Resume({
   tagline,
   website,
   profile,
-  git,
+  code,
   location,
   avatar,
   experience,
@@ -61,13 +54,13 @@ function Resume({
         tagline={tagline}
         website={website}
         profile={profile}
-        git={git}
+        code={code}
         location={location}
         avatar={avatar}
       />
 
       <main>
-        <Reflex className={classes.layout} size="tablet">
+        <Reflex className={classes.layout} device="tablet">
           <div className={classes.content}>
             <Section title="Professional Experience">
               {experience.map((exp) => (

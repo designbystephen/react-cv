@@ -1,6 +1,7 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
-import colors from '../../../styles/colors';
+import theme from '../../styles/theme';
+
 
 type SectionHeaderProps = {
   text: string;
@@ -9,7 +10,7 @@ type SectionHeaderProps = {
 const useStyles = createUseStyles(
   {
     root: {
-      borderBottom: `3px solid ${colors.grey700}`,
+      borderBottom: `3px solid ${theme.colors.grey700}`,
       marginBottom: `12px`,
       paddingBottom: `3px`,
     },

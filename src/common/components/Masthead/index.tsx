@@ -11,14 +11,14 @@ import LinkedIn from '../../icons/LinkedIn';
 import Globe from '../../icons/Globe';
 import Reflex from '../Reflex';
 
-type HeaderProps = {
+export type MastheadProps = {
   name: string;
   tagline: string;
   avatar: string;
   website?: { name: string; url: string };
   email?: string;
   profile?: { name: string; url: string };
-  git?: { name: string; url: string };
+  code?: { name: string; url: string };
   location?: string;
 };
 
@@ -52,9 +52,9 @@ function Masthead({
   website,
   profile,
   email,
-  git,
+  code,
   location,
-}: HeaderProps) {
+}: MastheadProps) {
   const classes = useStyles();
 
   return (
@@ -63,7 +63,7 @@ function Masthead({
         <PageHeader text={name} />
         <PageSubHeader text={tagline} />
 
-        <Reflex className={classes.links} size="phone">
+        <Reflex className={classes.links} device="phone">
           {Boolean(website) && (
             <Chip icon={<Globe />} text={website!.name} url={website!.url} />
           )}
@@ -76,8 +76,8 @@ function Masthead({
             <Chip icon={<LinkedIn />} text={profile!.name} url={profile!.url} />
           )}
 
-          {Boolean(git) && (
-            <Chip icon={<Code />} text={git!.name} url={git!.url} />
+          {Boolean(code) && (
+            <Chip icon={<Code />} text={code!.name} url={code!.url} />
           )}
 
           {Boolean(location) && (

@@ -1,61 +1,58 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
-import colors from '../../../styles/colors';
-import { SizeVariants, StyleVariants } from '../../../styles/variants';
+import theme from '../../styles/theme';
 
 export type BubbleProps = {
-  text: string;
-  variant?: `${StyleVariants}`;
-  size?: `${SizeVariants}`;
+  text: string,
+  variant?: keyof typeof theme.variants.block,
+  size?: keyof typeof theme.variants.size
 };
-
-const filledStyle = {
-  border: 'none',
-};
-
-const outlinedStyle = {
-  backgroundColor: 'transparent',
-  border: '1px solid',
-  borderColor: colors.grey600,
-};
-
-const smallStyle = {
-  fontSize: '.80em',
-};
-
-const outlinedPrintStyle = {
-  backgroundColor: colors.grey200,
-  border: 'none',
-  fontSize: '.80em',
-}
 
 const useStyles = createUseStyles({
-  bubble: ({ variant, size }: Partial<BubbleProps>) => ({
+  bubble: {
     display: 'inline-block',
     borderRadius: '6px',
-    backgroundColor: colors.grey200,
+    backgroundColor: theme.colors.grey200,
     padding: '3px 6px',
+    border: 'none',
+  },
 
-    ...(variant === StyleVariants.outlined ? outlinedStyle : filledStyle),
+  outlined: {
+    backgroundColor: 'transparent',
+    border: '1px solid',
+    borderColor: theme.colors.grey600,
 
-    ...(size === SizeVariants.small ? smallStyle : {}),
-  }),
+    '@media print': {
+      backgroundColor: theme.colors.grey200,
+      border: 'none',
+      fontSize: '.80em',
+    }
+  },
 
-  '@media print': {
-    bubble: ({ variant }: Partial<BubbleProps>) => ({
-      ...(variant === StyleVariants.outlined ? outlinedPrintStyle: {}),
-    })
-  }
+  filled: {},
+
+  small: {
+    fontSize: '.80em',
+  },
+
+  medium: {},
+  large: {},
 });
 
 function Bubble({
   text,
-  variant = StyleVariants.filled,
-  size = SizeVariants.medium,
+  variant = 'filled',
+  size = 'medium',
 }: BubbleProps) {
-  const classes = useStyles({ variant, size });
+  const classes = useStyles();
 
-  return <div className={classes.bubble}>{text}</div>;
+  const classNames = [
+    classes.bubble,
+    classes[variant],
+    classes[size],
+  ].join(' ');
+
+  return <div className={classNames}>{text}</div>;
 }
 
 export default React.memo(Bubble);

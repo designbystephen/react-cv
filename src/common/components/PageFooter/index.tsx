@@ -1,6 +1,6 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
-import colors from '../../../styles/colors';
+import theme from '../../styles/theme';
 
 type PageFooterProps = {
   children: React.ReactNode;
@@ -11,7 +11,7 @@ const useStyles = createUseStyles(
     root: {
       textAlign: 'center',
       padding: '12px 0',
-      color: colors.grey600,
+      color: theme.colors.grey600,
 
       '& > p': {
         margin: '6px 0',

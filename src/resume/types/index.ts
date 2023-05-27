@@ -7,7 +7,7 @@ export type Resume = {
     email?: string;
     profile?: { name: string; url: string };
     location?: string;
-    git?: { name: string; url: string };
+    code?: { name: string; url: string };
   };
 
   experience: Array<{

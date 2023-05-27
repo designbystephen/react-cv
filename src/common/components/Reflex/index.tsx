@@ -1,19 +1,26 @@
-import React from 'react'
-import { ScreenSizeVariants } from '../../../styles/variants';
-import './index.css';
+import React from 'react';
+import { Device } from '../../styles/theme';
+import useStyles from './styles';
 
 type ReflexProps = {
   children: React.ReactNode,
-  size?: `${ScreenSizeVariants}`,
   className?: string,
+  device: keyof typeof Device,
+  print?: boolean,
 };
 
+function Reflex({children, className = '', device = 'phone', print }: ReflexProps) {
+  const classes = useStyles();
 
-function Reflex({children, size, className }: ReflexProps) {
-  const modifier = size ? `reflex--${size}` : '';
+  const classNames = React.useMemo(() => [
+      classes.reflex,
+      print ?? classes.print,
+      classes[device],
+      className,
+  ].filter(Boolean).join(' '), [classes, print, className, device]);
 
   return (
-    <div className={`reflex ${modifier} ${className}`}>
+    <div className={classNames}>
       {children}
     </div>
   )

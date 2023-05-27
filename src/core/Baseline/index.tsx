@@ -1,24 +1,25 @@
 import React from 'react';
 import { createUseStyles } from 'react-jss';
-import colors from '../../styles/colors';
-import vars from '../../styles/vars';
-import '../../styles/baseline/index.css';
+import theme from '../../common/styles/theme';
+import '../../common/styles/baseline.css';
+import { getMediaQueryForDevice, getPrintMediaStyles } from '../../common/styles/utils';
 
 const bodyStyles = {
-  fontFamily: vars.defaultFontFamily,
-  fontSize: vars.defaultFontSize,
-  maxWidth: vars.maxBodyWidth,
+  backgroundColor: '#FFF',
+  fontFamily: theme.defaults.fontFamily,
+  fontSize: theme.defaults.fontSize,
+  maxWidth: theme.layout.fixedWidthCenterContainer.maxWidth,
   margin: '0 auto',
-  color: colors.grey800,
-  padding: vars.defaultSpacing,
+  color: theme.colors.grey800,
+  padding: theme.defaults.spacing,
 };
 
 const bodyStylesTablet = {
-  padding: `${vars.defaultSpacing/2}px`,
+  padding: `${theme.defaults.spacing/2}px`,
 };
 
 const bodyStylesPhone = {
-  padding: `${vars.defaultSpacing/4}px`,
+  padding: `${theme.defaults.spacing/4}px`,
 }
 
 const bodyStylesPrint = {
@@ -26,28 +27,31 @@ const bodyStylesPrint = {
   maxWidth: 'unset',
   padding: 0,
   margin: 0,
-  fontSize: `${vars.printFontSize}px`,
+  fontSize: `${theme.print.fontSize}px`,
 }
 
 const useStyles = createUseStyles({
   '@global': {
-    html: bodyStyles,
-    body: bodyStyles,
-
-    '@media screen and (max-width: 576px)': {
-      html: bodyStylesPhone,
-      body: bodyStylesPhone,
+    html: {
+      ...bodyStyles,
     },
 
-    '@media screen and (max-width: 768px)': {
-      html: bodyStylesTablet,
-      body: bodyStylesTablet,
+    body: {
+      ...bodyStyles,
     },
-    
-    '@media print': {
-      html: bodyStylesPrint,
-      body: bodyStylesPrint,
-    }
+
+    [getMediaQueryForDevice('phone')]: {
+      html: {...bodyStylesPhone},
+    },
+
+    [getMediaQueryForDevice('tablet')]: {
+      body: {...bodyStylesTablet}
+    },
+
+    ...getPrintMediaStyles({
+      html: {...bodyStylesPrint },
+      body: {...bodyStylesPrint },
+    }),
   },
 });
 

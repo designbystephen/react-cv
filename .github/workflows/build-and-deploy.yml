@@ -1,0 +1,42 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile 
+
+      - name: Build React app
+        run: yarn build
+
+      - name: Clone deployment repository
+        run: git clone https://github.com/designbystephen/designbystephen.github.io.git
+
+      - name: Copy artifacts to deployment repository
+        run: cp -R ./build/* designbystephen.github.io/
+    
+      - name: Commit and push changes
+        env:
+            ANOTHER_REPO_TOKEN: ${{ secrets.GH_PAGES_DEPLOY }}
+        run: |
+          cd designbystephen.github.io/
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add .
+          git commit -m "Update from GitHub Actions"
+          git push
