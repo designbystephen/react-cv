@@ -1,6 +1,7 @@
 # artifacts
 dist
 build
+public
 coverage
 
 # package managers
