@@ -1,7 +1,8 @@
-const puppeteer = require('puppeteer');
-const { exec } = require('child_process');
-const fs = require('fs');
-const path = require('path');
+import puppeteer from 'puppeteer';
+import { exec } from 'child_process';
+import fs from 'fs';
+import path from 'path';
+import util from 'util';
 
 const {
   HOST = 'localhost', 
@@ -10,43 +11,28 @@ const {
   PDF_OUTPUT_PATH = 'build'
 } = process.env;
 
+
+const execAsync = util.promisify(exec);
+
 /**
  * Start server instance
  */
-const start = () => (
-  new Promise((resolve, reject) => {
-    exec('yarn run start', (error, stdout, stderr) => {
-      if (error) {
-        console.error(`Error starting the server: ${error}`);
-        reject(error);
-      }
-
-      resolve();
-    })
-  })
-);
+const startServer = async () => {
+ execAsync('yarn start');
+};
 
 /**
  * Stop server instance
  */
-const stop = () => (
-  new Promise((resolve, reject) => {
-    exec('yarn run stop', (error, stdout, stderr) => {
-      if (error) {
-        console.error(`Error stopping the server: ${error}`);
-        reject(error);
-      }
-      
-      resolve();
-    })
-  })
+const stopServer = async () => (
+  execAsync('yarn stop')
 );
 
 /**
  * Create pdf output directory
  */
 const createPdfDestination = async (p, filename) => {
-  const exists = await fs.existsSync(p);
+  const exists = fs.existsSync(p);
 
   if (!exists) {
     await fs.promises.mkdir(p);
@@ -58,8 +44,8 @@ const createPdfDestination = async (p, filename) => {
 /**
  * Print a pdf screenshot from browser
  */
-const print = async () => {
-  const browser = await puppeteer.launch({ headless: 'new' });
+const printPdf = async () => {
+  const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
   await page.goto(`http://${HOST}:${PORT}`, { waitUntil: 'networkidle0' });
@@ -74,7 +60,7 @@ const print = async () => {
   // Configure print options
   const pdfOptions = {
     path: pdfPath,
-    format: 'Letter',
+    format: 'LETTER',
     printBackground: true,
     margin: {
       top: `${marginPixels}px`,
@@ -94,13 +80,13 @@ const print = async () => {
 
 (async () => {
   console.info('Starting local server...');
-  await start();
+  await startServer();
   
   console.info('Printing as a pdf...');
-  const destination = await print();
+  const destination = await printPdf();
 
-  console.info(`Sucessfully printed to ${destination}`);
+  console.info(`Successfully printed to ${destination}`);
 
   console.info('Stopping local server...');
-  await stop();
+  await stopServer();
 })();
